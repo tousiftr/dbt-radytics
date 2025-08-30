@@ -1,7 +1,55 @@
 version: 2
+
 sources:
   - name: uber_dataset
-    database: rad-analytics-470607
-    schema: uber_dataset
+    database: rad-analytics-470607  # The project ID
+    schema: uber_dataset           # The schema name in BigQuery
     tables:
-      - name: booking_data_uber
+      - name: uber_customer_data_clean
+        description: "Cleaned Uber customer booking data with customer and booking details."
+        columns:
+          - name: customer_id
+            description: "Unique identifier for each customer."
+            tests:
+              - not_null:  # Ensure the customer_id is not null
+                  severity: warn
+          - name: date
+            description: "The date the booking was made."
+          - name: time
+            description: "The time the booking was made."
+          - name: booking_id
+            description: "Unique identifier for each booking."
+          - name: booking_status
+            description: "The status of the booking (completed, cancelled, etc.)."
+          - name: vehicle_type
+            description: "The type of vehicle used for the ride."
+          - name: pickup_location
+            description: "Location where the customer was picked up."
+          - name: drop_location
+            description: "Location where the customer was dropped off."
+          - name: avg_vtat
+            description: "Average Vehicle Turnaround Time."
+          - name: avg_ctat
+            description: "Average Customer Turnaround Time."
+          - name: cancelled_rides_by_customer
+            description: "Number of rides cancelled by the customer."
+          - name: reason_for_cancelling_by_customer
+            description: "Reason provided by the customer for cancelling."
+          - name: cancelled_rides_by_driver
+            description: "Number of rides cancelled by the driver."
+          - name: driver_cancellation_reason
+            description: "Reason provided by the driver for cancelling."
+          - name: incomplete_rides
+            description: "Number of incomplete rides."
+          - name: incomplete_rides_reason
+            description: "Reason why the ride was incomplete."
+          - name: booking_value
+            description: "Monetary value of the booking."
+          - name: ride_distance
+            description: "Distance of the ride."
+          - name: driver_ratings
+            description: "Ratings given by the driver to the customer."
+          - name: customer_rating
+            description: "Ratings given by the customer to the driver."
+          - name: payment_method
+            description: "Method of payment used for the ride."
