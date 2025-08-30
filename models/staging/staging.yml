@@ -10,6 +10,9 @@ sources:
         columns:
           - name: customer_id
             description: "Unique identifier for each customer."
+            tests:
+              - not_null:  # Ensure the customer_id is not null
+                  severity: warn
           - name: date
             description: "The date the booking was made."
           - name: time
