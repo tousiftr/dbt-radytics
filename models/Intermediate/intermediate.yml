@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: int_dim_user
+    description: "This intermediate model creates a user dimension table based on the cleaned customer data."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - not_null:    # Ensures that the customer_id cannot be null
+              severity: warn
+          - unique:      # Ensures that customer_id is unique
+              severity: warn
