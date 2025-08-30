@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: uber_dataset
+    database: rad-analytics-470607
+    schema: uber_dataset
+    tables:
+      - name: booking_data_uber
