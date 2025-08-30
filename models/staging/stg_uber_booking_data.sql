@@ -1,3 +1,6 @@
+
+
+
 WITH raw_data AS (
     SELECT 
         date,
