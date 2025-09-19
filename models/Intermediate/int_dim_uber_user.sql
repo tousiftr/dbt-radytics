@@ -4,5 +4,5 @@ WITH customer_data AS (
         customer_id 
     FROM {{ ref('stg_secure_user') }}
 )
-SELECT *
+SELECT distinct *
 FROM customer_data

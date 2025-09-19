@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: mrt_uber_customer_booking
+    description: >
+      Customer booking mart that extends `int_fct_user_book` with churn insights.
+      Includes all original booking-level fields plus customer-level churn metrics.
+    columns:
+      - name: customer_id
+        description: "Unique identifier for the customer."
+        tests:
+          - not_null
+
+      - name: date
+        description: "Date of the booking."
+
+      - name: time
+        description: "Time of the booking."
+
+      - name: booking_id
+        description: "Unique identifier for the booking."
+        tests:
+          - not_null
+
+      - name: booking_status
+        description: "Status of the booking (completed, cancelled, incomplete, etc.)."
+
+      - name: vehicle_type
+        description: "Type of vehicle requested (e.g., sedan, SUV)."
+
+      - name: pickup_location
+        description: "Pickup location for the booking."
+
+      - name: drop_location
+        description: "Drop-off location for the booking."
+
+      - name: avg_vtat
+        description: "Average vehicle turnaround time."
+
+      - name: avg_ctat
+        description: "Average customer turnaround time."
+
+      - name: cancelled_rides_by_customer
+        description: "Number of rides cancelled by the customer."
+
+      - name: reason_for_cancelling_by_customer
+        description: "Reason provided by the customer for cancelling the ride."
+
+      - name: cancelled_rides_by_driver
+        description: "Number of rides cancelled by the driver."
+
+      - name: driver_cancellation_reason
+        description: "Reason provided by the driver for cancelling the ride."
+
+      - name: incomplete_rides
+        description: "Number of rides that were incomplete."
+
+      - name: incomplete_rides_reason
+        description: "Reason the ride was marked incomplete."
+
+      - name: booking_value
+        description: "Monetary value of the booking."
+
+      - name: ride_distance
+        description: "Distance of the ride."
+
+      - name: driver_ratings
+        description: "Rating given to the driver by the customer."
+
+      - name: customer_rating
+        description: "Rating given by the driver to the customer."
+
+      - name: payment_method
+        description: "Payment method used (cash, card, wallet, etc.)."
+
+      # 🔥 New insight fields
+      - name: customer_last_booking_date
+        description: "Most recent booking date for the customer."
+
+      - name: customer_days_since_last_booking
+        description: "Number of days between the last booking and today."
+
+      - name: is_churned_60d
+        description: "Flag indicating if the customer has not booked in the last 60 days."
+        tests:
+          - not_null

@@ -1,13 +1,86 @@
 version: 2
 
 models:
-  - name: int_dim_user
+  - name: int_dim_uber_user
     description: "This intermediate model creates a user dimension table based on the cleaned customer data."
     columns:
       - name: customer_id
         description: "Unique identifier for each customer."
         tests:
-          - not_null:    # Ensures that the customer_id cannot be null
+          - not_null: # Ensures that the customer_id cannot be null
               severity: warn
-          - unique:      # Ensures that customer_id is unique
+          - unique: # Ensures that customer_id is unique
               severity: warn
+
+  - name: int_fct_user_book
+    description: "Intermediate fact model combining Uber customers with their booking data. Includes ride details, cancellations, ratings, and payment info."
+    columns:
+      - name: customer_id
+        description: "Unique identifier of the customer who made the booking."
+        tests:
+          - not_null
+      - name: date
+        description: "Date of the booking."
+        tests:
+          - not_null
+
+      - name: time
+        description: "Time of the booking."
+        tests:
+          - not_null
+
+      - name: booking_id
+        description: "Unique identifier for the booking."
+        tests:
+          - not_null
+          
+      - name: booking_status
+        description: "Current status of the booking (e.g., completed, cancelled, incomplete)."
+
+      - name: vehicle_type
+        description: "Type of vehicle requested (e.g., sedan, SUV)."
+
+      - name: pickup_location
+        description: "Pickup location of the ride."
+
+      - name: drop_location
+        description: "Drop-off location of the ride."
+
+      - name: avg_vtat
+        description: "Average vehicle turnaround time."
+
+      - name: avg_ctat
+        description: "Average customer turnaround time."
+
+      - name: cancelled_rides_by_customer
+        description: "Count of cancelled rides by customer."
+
+      - name: reason_for_cancelling_by_customer
+        description: "Reason provided by the customer for cancelling the ride."
+
+      - name: cancelled_rides_by_driver
+        description: "Count of cancelled rides by driver."
+
+      - name: driver_cancellation_reason
+        description: "Reason provided by the driver for cancelling the ride."
+
+      - name: incomplete_rides
+        description: "Number of incomplete rides for the booking."
+
+      - name: incomplete_rides_reason
+        description: "Reason for an incomplete ride."
+
+      - name: booking_value
+        description: "Total monetary value of the booking."
+
+      - name: ride_distance
+        description: "Distance of the ride in kilometers/miles."
+
+      - name: driver_ratings
+        description: "Rating given to the driver."
+
+      - name: customer_rating
+        description: "Rating given by the driver to the customer."
+
+      - name: payment_method
+        description: "Payment method used (e.g., card, cash, wallet)."
